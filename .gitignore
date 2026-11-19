@@ -1,0 +1,20 @@
+# Big or regenerable files: each of us makes these locally / on Colab
+data/dataset-resized/
+data/dtd_download/
+data/masks/
+data/textures/
+data/test_shifts/
+checkpoints/
+__MACOSX/
+*.zip
+
+# Phone photos ARE committed (small, and everyone needs the same set):
+# data/phone_photos/<class>/*.jpg
+
+# results/ IS committed (small JSON files and plots) so everyone can see everyone's numbers.
+
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+.venv/
