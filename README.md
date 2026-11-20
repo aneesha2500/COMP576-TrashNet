@@ -33,7 +33,7 @@ data/phone_photos/       our phone photos (committed)
 data/masks_fixed/        SAM-fixed masks (committed)
 data/dataset-resized/    TrashNet          (NOT committed, downloaded by get_data.py)
 data/masks/, textures/, test_shifts/       (NOT committed, made by the scripts)
-checkpoints/             trained models    (NOT committed, too big; keep on the shared Google Drive)
+checkpoints/             trained models    (NOT committed, too big; keep on the shared Google Drive folder "COMP576 - Deep Learning Project")
 results/                 JSON results, summary tables and plots (committed)
 ```
 
