@@ -67,6 +67,7 @@ def train(args):
 
     CHECKPOINT_DIR.mkdir(parents=True, exist_ok=True)
     ckpt = CHECKPOINT_DIR / f"{name}.pt"
+    partial = CHECKPOINT_DIR / f"{name}.partial"   # renamed to .pt only when training finishes
     history, best, bad_epochs = [], -1.0, 0
     for epoch in range(1, epochs + 1):
         t0 = time.time()
@@ -91,13 +92,15 @@ def train(args):
         if val_acc > best:
             best, bad_epochs = val_acc, 0
             torch.save({"model": args.model, "aug": args.aug, "seed": args.seed,
-                        "state_dict": model.state_dict(), "epoch": epoch, "val_acc": val_acc}, ckpt)
+                        "state_dict": model.state_dict(), "epoch": epoch, "val_acc": val_acc}, partial)
         else:
             bad_epochs += 1
             if bad_epochs >= args.patience:
                 print(f"Early stop: no improvement for {args.patience} epochs")
                 break
 
+    import shutil
+    shutil.move(str(partial), str(ckpt))   # only finished runs get a .pt file
     save_json({"run": name, "best_val_acc": best, "lr": lr, "args": vars(args), "epochs_run": len(history),
                "epochs": history}, RESULTS_DIR / "train" / f"{name}.json")
     print(f"Best val acc {best:.3f}. Saved {ckpt}")
